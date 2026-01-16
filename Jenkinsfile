@@ -1,16 +1,28 @@
 pipeline {
-    agent any
+    agent any   // Runs on any available Ubuntu/Linux agent
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/<harivarma44>/ip-check-script.git'
+                // Clone your GitHub repository
+                git branch: 'main', url: 'https://github.com/harivarma44/ip-check-script.git'
             }
         }
         stage('Run Script') {
             steps {
-                // Run PowerShell script
-                powershell 'powershell.exe -ExecutionPolicy Bypass -File Get-IP.ps1'
+                // Ensure script is executable
+                sh 'chmod +x get-ip.sh'
+                
+                // Run the script
+                sh './get-ip.sh'
             }
+        }
+    }
+    post {
+        success {
+            echo 'Pipeline executed successfully!'
+        }
+        failure {
+            echo 'Pipeline failed!'
         }
     }
 }
