@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/<your-username>/ip-check-script.git'
+                git branch: 'main', url: 'https://github.com/<harivarma44>/ip-check-script.git'
             }
         }
         stage('Run Script') {
